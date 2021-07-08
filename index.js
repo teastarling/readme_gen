@@ -1,43 +1,47 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
+const generateMarkdown = require('./utils/generateMarkdown')
+
 // TODO: Create an array of questions for user input
 let questions = [
     {
         type: 'input',
-        message: 'Project Title:',
+        message: 'What is your project name?',
         name: 'title',
     },
     {
         type: 'input',
-        message: 'Project description:',
+        message: 'Please write a short description of your project:',
         name: 'description',
     },
     {
         type: 'input',
-        message: 'Installation instructions:',
+        message: 'What command should be run to install dependencies?',
         name: 'installation',
+        default: 'npm i',
     },
     {
         type: 'input',
-        message: 'Usage information:',
+        message: 'What does the user need to know about using the repo?',
         name: 'usage',
     },
     {
         type: 'input',
-        message: 'Contribution guidelines:',
+        message: 'What does the user need to know about contributing to the repo?',
         name: 'contribution',
     },
     {
         type: 'input',
         message: 'Test instructions:',
         name: 'test',
+        default: 'npm test',
     },
     {
-        type: 'checkbox',
+        type: 'list',
         message: 'Please choose application license:',
         name: 'license',
-        choices: ['one', 'two', 'three'],
+        choices: ['MIT', 'Apache', 'BSD-3', 'none'],
     },
     {
         type: 'input',
@@ -53,22 +57,39 @@ let questions = [
 
 // TODO: Create a function to write README file
 const generateReadme = (data) =>
-    `#${data.title}
-    ##Project Description
-    ${data.description}
-    ##Installation Instructions
+`# ${data.title}
+
+${generateMarkdown.renderLicenseBadge(data.license)}
+
+## Table of Contents
+* [Description](#description)
+* [Installation Instructions](#installation)
+* [Usage Information](#usage)
+* [Contribution Guidelines](#contributing)
+* [Test Instructions](#test)
+${generateMarkdown.renderLicenseLink(data.license)}
+* [Questions](#questions)
+
+## Description
+${data.description}
+
+## Installation
     ${data.installation}
-    ##Usage Information
-    ${data.usage}
-    ##Contribution Guidelines
-    ${data.contribution}
-    ##Test Instructions
+
+## Usage
+${data.usage}
+
+## Contributing
+${data.contribution}
+
+## Test
     ${data.test}
-    ##License Information
-    ${data.license}
-    ##Questions
-    Please contact me at my [Github](https://github.com/${data.github})
-    Or contact me by email at [${data.email}](mailto:${data.email})`;
+
+\n${generateMarkdown.renderLicenseSection(data.license)}\n
+
+## Questions
+* Please contact me at my [Github](https://github.com/${data.github})
+* Or contact me by email at [${data.email}](mailto:${data.email})`;
 
 // TODO: Create a function to initialize app
 function init() {
