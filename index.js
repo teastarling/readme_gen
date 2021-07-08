@@ -2,7 +2,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 // TODO: Create an array of questions for user input
-const questions = [
+let questions = [
     {
         type: 'input',
         message: 'Project Title:',
@@ -52,7 +52,7 @@ const questions = [
 ];
 
 // TODO: Create a function to write README file
-function writeToFile(data) {
+const generateReadme = (data) =>
     `#${data.title}
     ##Project Description
     ${data.description}
@@ -68,16 +68,17 @@ function writeToFile(data) {
     ${data.license}
     ##Questions
     Please contact me at my [Github](https://github.com/${data.github})
-    Or contact me by email at [${data.email}](mailto:${data.email})`
-}
+    Or contact me by email at [${data.email}](mailto:${data.email})`;
 
 // TODO: Create a function to initialize app
 function init() {
     inquirer.prompt(questions)
-        .then((data) => fs.writeFile('READMEnew.md', writeToFile(data)
-        ))
-        .then(() => console.log('Successfully wrote to READMEnew.md'))
-        .catch((err) => console.error(err));
+        .then((data) => {
+            const readmeContent = generateReadme(data);
+
+            fs.writeFile('READMEnew.md', readmeContent, (err) =>
+            err ? console.log(err) : console.log('Successfully created README!')
+            )});
 }
 
 // Function call to initialize app
