@@ -48,5 +48,5 @@ const renderLicenseSection = (license) => {
 }
 
 
-
+// functions to export for use on index.js
 module.exports = {renderLicenseLink, renderLicenseBadge, renderLicenseSection};
