@@ -61,17 +61,16 @@ const generateReadme = (data) =>
 
 ${generateMarkdown.renderLicenseBadge(data.license)}
 
-## Table of Contents
-* [Description](#description)
-* [Installation Instructions](#installation)
-* [Usage Information](#usage)
-* [Contribution Guidelines](#contributing)
-* [Test Instructions](#test)
-${generateMarkdown.renderLicenseLink(data.license)}
-* [Questions](#questions)
-
 ## Description
 ${data.description}
+
+## Table of Contents
+* [Installation Instructions](#installation)
+* [Usage Information](#usage)
+${generateMarkdown.renderLicenseLink(data.license)}
+* [Contribution Guidelines](#contributing)
+* [Test Instructions](#test)
+* [Questions](#questions)
 
 ## Installation
     ${data.installation}
@@ -79,13 +78,13 @@ ${data.description}
 ## Usage
 ${data.usage}
 
+\n${generateMarkdown.renderLicenseSection(data.license)}\n
+
 ## Contributing
 ${data.contribution}
 
 ## Test
     ${data.test}
-
-\n${generateMarkdown.renderLicenseSection(data.license)}\n
 
 ## Questions
 * Please contact me at my [Github](https://github.com/${data.github})
@@ -97,7 +96,7 @@ function init() {
         .then((data) => {
             const readmeContent = generateReadme(data);
 
-            fs.writeFile('READMEnew.md', readmeContent, (err) =>
+            fs.writeFile('sampleREADME.md', readmeContent, (err) =>
             err ? console.log(err) : console.log('Successfully created README!')
             )});
 }
