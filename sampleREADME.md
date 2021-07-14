@@ -1,9 +1,9 @@
-# New Project
+# Team Profile Generator
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 ## Description
-New project to demonstrate application
+Utilizes Node.js to create an html page with cards for employee information based upon user input in the terminal.
 
 ## Table of Contents
 * [Installation Instructions](#installation)
@@ -17,7 +17,7 @@ New project to demonstrate application
     npm i
 
 ## Usage
-Application should be run in the terminal
+blank
 
 
 ## License 
@@ -25,7 +25,7 @@ Application should be run in the terminal
 
 
 ## Contributing
-Ask nicely :)
+blank
 
 ## Test
     npm test
